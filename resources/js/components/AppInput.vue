@@ -4,8 +4,8 @@ type InputType = 'text' | 'date';
 interface Props {
   modelValue: string | number;
   label: string;
-  type: InputType;
-  error: string | null | undefined;
+  type?: InputType | null;
+  error: string | undefined;
 }
 
 withDefaults(defineProps<Props>(), {
