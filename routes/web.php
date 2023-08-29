@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PostsController;
 use App\Models\Post;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -15,15 +16,6 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', function () {
-    $postDTOs = \App\Models\Post::all()->map(fn (Post $post) => new \App\DataTransferObjects\PostDTO(
-        title: $post->title,
-        slug: $post->slug,
-        body: $post->body,
-        publishedAt: $post->published_at
-    ));
-
-    return Inertia::render('Home', [
-        'posts' => $postDTOs
-    ]);
-});
+Route::get('/', [PostsController::class, 'index'])->name('home');
+Route::get('posts/create', [PostsController::class, 'create']);
+Route::post('posts', [PostsController::class, 'store']);

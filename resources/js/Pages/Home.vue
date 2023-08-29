@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import {Post} from "@/types";
+import {Link} from "@inertiajs/vue3";
 
 interface Props {
     posts: Array<Post>;
@@ -10,6 +11,8 @@ defineProps<Props>()
 
 <template>
     <div style="max-width: 820px; margin: 0 auto;">
+        <Link href="/posts/create">Create new post</Link>
+
         <article v-for="post in posts" :key="post.slug" style="margin-bottom: 100px;">
             <h2>{{ post.title }}</h2>
 
