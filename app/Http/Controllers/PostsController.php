@@ -13,7 +13,9 @@ class PostsController extends Controller
 {
     public function index()
     {
-        $postDTOs = \App\Models\Post::paginate(10)
+        $postDTOs = \App\Models\Post::query()
+            ->latest()
+            ->paginate(10)
             ->map(fn (Post $post) => new \App\DataTransferObjects\PostDTO(
                 title: $post->title,
                 slug: $post->slug,
