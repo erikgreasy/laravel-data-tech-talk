@@ -13,12 +13,13 @@ class PostsController extends Controller
 {
     public function index()
     {
-        $postDTOs = \App\Models\Post::all()->map(fn (Post $post) => new \App\DataTransferObjects\PostDTO(
-            title: $post->title,
-            slug: $post->slug,
-            body: $post->body,
-            publishedAt: $post->published_at
-        ));
+        $postDTOs = \App\Models\Post::paginate(10)
+            ->map(fn (Post $post) => new \App\DataTransferObjects\PostDTO(
+                title: $post->title,
+                slug: $post->slug,
+                body: $post->body,
+                publishedAt: $post->published_at
+            ));
 
         return Inertia::render('Home', [
             'posts' => $postDTOs
