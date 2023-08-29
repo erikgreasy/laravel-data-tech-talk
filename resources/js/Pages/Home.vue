@@ -10,13 +10,24 @@ defineProps<Props>()
 </script>
 
 <template>
-    <div style="max-width: 820px; margin: 0 auto;">
-        <Link href="/posts/create">Create new post</Link>
+    <div class="py-10">
+        <Link
+            href="/posts/create"
+            class="bg-blue-600 py-2 px-4 text-white rounded inline-block mb-10 hover:bg-blue-700"
+        >
+          Create new post
+        </Link>
 
-        <article v-for="post in posts" :key="post.slug" style="margin-bottom: 100px;">
-            <h2>{{ post.title }}</h2>
+        <div class="space-y-5">
+          <article v-for="post in posts" :key="post.slug" class="border rounded p-5 shadow space-y-5">
+              <h2 class="font-bold text-xl mb-5">{{ post.title }}</h2>
 
-            <main>{{ post.body}}</main>
-        </article>
+              <main>{{ post.body}}</main>
+
+              <footer>
+                <a href="#" class="text-blue-600">Read more</a>
+              </footer>
+          </article>
+        </div>
     </div>
 </template>

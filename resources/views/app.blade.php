@@ -7,6 +7,8 @@
     @inertiaHead
 </head>
 <body>
-    @inertia
+    <div class="container">
+        @inertia
+    </div>
 </body>
 </html>

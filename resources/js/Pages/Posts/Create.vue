@@ -1,8 +1,9 @@
 <script lang="ts" setup>
-import {ref} from 'vue';
-import { router } from '@inertiajs/vue3'
+import AppInput from "@/components/AppInput.vue";
+import AppTextarea from "@/components/AppTextarea.vue";
+import {useForm} from "@inertiajs/vue3";
 
-const post = ref({
+const post = useForm({
     title: 'Moj novy clanok',
     slug: 'moj-novy-clanok',
     body: 'Obsah clanku',
@@ -10,40 +11,22 @@ const post = ref({
 })
 
 const storePost = async () => {
-    router.post('/posts', post.value)
+  post.clearErrors()
+
+  post.post('/posts')
 }
 </script>
 
 <template>
-    <form @submit.prevent="storePost">
-        <div>
-            <label for="">
-                Title:
-                <input type="text" v-model="post.title">
-            </label>
-        </div>
+    <form @submit.prevent="storePost" class="py-10">
+        <AppInput v-model="post.title" label="Title:" :error="post.errors.title" />
 
-        <div>
-            <label for="">
-                Slug:
-                <input type="text" v-model="post.slug">
-            </label>
-        </div>
+        <AppInput v-model="post.slug" label="Slug:" :error="post.errors.slug" />
 
-        <div>
-            <label for="">
-                Body:
-                <textarea v-model="post.body"></textarea>
-            </label>
-        </div>
+        <AppTextarea v-model="post.body" label="Body:" :error="post.errors.body"/>
 
-        <div>
-            <label for="">
-                Published at:
-                <input type="date" v-model="post.published_at">
-            </label>
-        </div>
+        <AppInput type="date" v-model="post.published_at" label="Published at:" :error="post.errors.published_at" />
 
-        <button>Submit</button>
+        <button class="bg-blue-600 px-10 py-3 rounded block w-full text-white hover:bg-blue-700">Submit</button>
     </form>
 </template>
