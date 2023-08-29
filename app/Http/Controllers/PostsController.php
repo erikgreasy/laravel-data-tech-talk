@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Actions\CreatePostAction;
 use App\DataTransferObjects\PostDTO;
 use App\Http\Requests\PostRequest;
+use Carbon\Carbon;
 
 class PostsController extends Controller
 {
@@ -16,11 +17,11 @@ class PostsController extends Controller
             $validated['title'],
             $validated['slug'],
             $validated['body'],
-            $validated['published_at']
+            Carbon::parse($validated['published_at'])
         );
 
         $createPostAction->execute($postDto);
 
-        return redirect()->back();
+        return redirect()->route('home');
     }
 }
