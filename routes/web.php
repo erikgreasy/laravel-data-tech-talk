@@ -1,6 +1,8 @@
 <?php
 
+use App\Models\Post;
 use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,5 +16,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $postDTOs = \App\Models\Post::all()->map(fn (Post $post) => new \App\DataTransferObjects\PostDTO(
+        title: $post->title,
+        slug: $post->slug,
+        body: $post->body,
+        publishedAt: $post->published_at
+    ));
+
+    return Inertia::render('Home', [
+        'posts' => $postDTOs
+    ]);
 });
