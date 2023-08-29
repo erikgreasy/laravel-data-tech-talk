@@ -11,6 +11,7 @@ class CreatePostAction
     {
         $post = Post::create([
             'title' => $postDTO->title,
+            'slug' => $postDTO->slug,
             'body' => $postDTO->body,
             'published_at' => $postDTO->publishedAt,
         ]);
