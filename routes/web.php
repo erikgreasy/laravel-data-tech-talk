@@ -19,3 +19,4 @@ use Inertia\Inertia;
 Route::get('/', [PostsController::class, 'index'])->name('home');
 Route::get('posts/create', [PostsController::class, 'create']);
 Route::post('posts', [PostsController::class, 'store']);
+Route::delete('posts/{post:slug}', [PostsController::class, 'destroy']);

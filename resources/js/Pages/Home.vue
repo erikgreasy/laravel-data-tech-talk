@@ -1,12 +1,14 @@
 <script lang="ts" setup>
 import {Post} from "@/types";
-import {Link} from "@inertiajs/vue3";
+import {Link, useForm} from "@inertiajs/vue3";
 
 interface Props {
     posts: Array<Post>;
 }
 
 defineProps<Props>()
+
+const deleteForm = useForm({})
 </script>
 
 <template>
@@ -24,8 +26,12 @@ defineProps<Props>()
 
               <main>{{ post.body}}</main>
 
-              <footer>
+              <footer class="flex space-x-5">
                 <a href="#" class="text-blue-600">Read more</a>
+
+                <form @submit.prevent="deleteForm.delete(`/posts/${post.slug}`)">
+                  <button class="text-red-600">Delete</button>
+                </form>
               </footer>
           </article>
         </div>

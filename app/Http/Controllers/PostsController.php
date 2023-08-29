@@ -48,4 +48,11 @@ class PostsController extends Controller
 
         return redirect()->route('home');
     }
+
+    public function destroy(Post $post)
+    {
+        $post->delete();
+
+        return redirect()->route('home');
+    }
 }
