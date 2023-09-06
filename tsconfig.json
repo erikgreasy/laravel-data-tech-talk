@@ -1,5 +1,4 @@
 {
-    "extends": "@vue/tsconfig/tsconfig.web.json",
     "compilerOptions": {
     "strict": false,
         "allowJs": true,
