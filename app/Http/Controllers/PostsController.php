@@ -15,7 +15,7 @@ class PostsController extends Controller
     {
         $postDTOs = \App\Models\Post::query()
             ->latest()
-            ->paginate(10)
+            ->get()
             ->map(fn (Post $post) => new \App\DataTransferObjects\PostDTO(
                 title: $post->title,
                 slug: $post->slug,
