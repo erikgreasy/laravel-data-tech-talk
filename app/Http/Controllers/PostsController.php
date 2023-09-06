@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Actions\CreatePostAction;
-use App\DataTransferObjects\PostDTO;
+use App\Data\PostData;
 use App\Http\Requests\PostRequest;
 use App\Models\Post;
 use Carbon\Carbon;
@@ -13,18 +13,8 @@ class PostsController extends Controller
 {
     public function index()
     {
-        $postDTOs = \App\Models\Post::query()
-            ->latest()
-            ->get()
-            ->map(fn (Post $post) => new \App\DataTransferObjects\PostDTO(
-                title: $post->title,
-                slug: $post->slug,
-                body: $post->body,
-                publishedAt: $post->published_at
-            ));
-
         return Inertia::render('Home', [
-            'posts' => $postDTOs
+            'posts' => PostData::collection(\App\Models\Post::query()->latest()->get())
         ]);
     }
 
@@ -37,14 +27,7 @@ class PostsController extends Controller
     {
         $validated = $request->validated();
 
-        $postDto = new PostDTO(
-            $validated['title'],
-            $validated['slug'],
-            $validated['body'],
-            Carbon::parse($validated['published_at'])
-        );
-
-        $createPostAction->execute($postDto);
+        $createPostAction->execute(PostData::from($validated));
 
         return redirect()->route('home');
     }
