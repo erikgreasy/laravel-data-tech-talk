@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\Post;
+use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -36,7 +37,7 @@ class PostsTest extends TestCase
                 'title' => 'This is post title',
                 'slug' => 'this-is-post-title',
                 'body' => 'Very interesting post this is.',
-                'published_at' => '2023-07-06',
+                'published_at' => Carbon::parse('2023-07-06')->toDateTimeString(),
             ])
             ->assertRedirect('/');
 
@@ -44,7 +45,7 @@ class PostsTest extends TestCase
             'title' => 'This is post title',
             'slug' => 'this-is-post-title',
             'body' => 'Very interesting post this is.',
-            'published_at' => '2023-07-06',
+            'published_at' => Carbon::parse('2023-07-06')->toDateTimeString(),
         ]);
     }
 
