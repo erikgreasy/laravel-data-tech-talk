@@ -1,9 +1,8 @@
 <script lang="ts" setup>
-import {Post} from "@/types";
 import {Link, useForm} from "@inertiajs/vue3";
 
 interface Props {
-    posts: Array<Post>;
+    posts: Array<App.Data.PostData>;
 }
 
 defineProps<Props>()

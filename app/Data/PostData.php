@@ -11,8 +11,10 @@ use Spatie\LaravelData\Attributes\Validation\Unique;
 use Spatie\LaravelData\Attributes\WithCast;
 use Spatie\LaravelData\Data;
 use Spatie\LaravelData\Mappers\SnakeCaseMapper;
+use Spatie\TypeScriptTransformer\Attributes\TypeScript;
 
 #[MapName(SnakeCaseMapper::class)]
+#[TypeScript]
 class PostData extends Data
 {
     public function __construct(
