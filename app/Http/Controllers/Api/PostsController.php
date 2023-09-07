@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Data\PostData;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\PostResource;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
@@ -13,6 +13,6 @@ class PostsController extends Controller
     {
         $posts = Post::latest()->paginate(10);
 
-        return PostResource::collection($posts);
+        return PostData::collection($posts);
     }
 }
