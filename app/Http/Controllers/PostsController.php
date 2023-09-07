@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Actions\CreatePostAction;
 use App\Data\PostData;
-use App\Http\Requests\PostRequest;
 use App\Models\Post;
 use Carbon\Carbon;
 use Inertia\Inertia;
@@ -23,11 +22,9 @@ class PostsController extends Controller
         return Inertia::render('Posts/Create');
     }
 
-    public function store(PostRequest $request, CreatePostAction $createPostAction)
+    public function store(PostData $postData, CreatePostAction $createPostAction)
     {
-        $validated = $request->validated();
-
-        $createPostAction->execute(PostData::from($validated));
+        $createPostAction->execute($postData);
 
         return redirect()->route('home');
     }
